@@ -8,9 +8,18 @@ export default class Vec2 {
    * @param {Vec2} other
    * @return {Vec2}
    */
+  add(other) {
+    return new Vec2(this.x + other.x, this.y + other.y);
+  }
+
+  /**
+   * @param {Vec2} other
+   * @return {Vec2}
+   */
   sub(other) {
     return new Vec2(this.x - other.x, this.y - other.y);
   }
+
 
   /**
    * @param {Number} scalar
@@ -18,6 +27,14 @@ export default class Vec2 {
    */
   div(scalar) {
     return new Vec2(this.x / scalar, this.y / scalar);
+  }
+
+  /**
+   * @param {Number} scalar
+   * @return {Vec2}
+   */
+  mul(scalar) {
+    return new Vec2(this.x * scalar, this.y * scalar);
   }
 
   /**
