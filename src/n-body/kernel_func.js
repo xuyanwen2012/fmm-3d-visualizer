@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Gravitation function, AKA Kernel function.
  * @param {Vec2} p

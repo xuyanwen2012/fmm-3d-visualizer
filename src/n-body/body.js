@@ -1,3 +1,5 @@
+'use strict';
+
 export default class Body {
   /**
    * @param {Vec2} pos

@@ -1,3 +1,5 @@
+'use strict';
+
 export default class Vec2 {
   constructor(x, y) {
     this.x = x;
@@ -10,6 +12,14 @@ export default class Vec2 {
    */
   add(other) {
     return new Vec2(this.x + other.x, this.y + other.y);
+  }
+
+  /**
+   * @param {Vec2} other
+   */
+  addAsg(other) {
+    this.x += other.x;
+    this.y += other.y;
   }
 
   /**
