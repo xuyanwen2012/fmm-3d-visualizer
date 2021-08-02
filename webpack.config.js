@@ -15,4 +15,16 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({'title': '3D FMM Viewer'}),
   ],
+  module: {
+    rules: [
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
+    ],
+  },
 };
