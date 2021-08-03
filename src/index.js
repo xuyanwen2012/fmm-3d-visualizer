@@ -1,17 +1,12 @@
 'use strict';
 
-import {
-  Clock,
-  FogExp2,
-  PerspectiveCamera, Scene,
-  WebGLRenderer,
-} from 'three';
+import {Clock, FogExp2, PerspectiveCamera, Scene, WebGLRenderer} from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import {EffectComposer} from 'three/examples/jsm/postprocessing/EffectComposer';
 import {RenderPass} from 'three/examples/jsm/postprocessing/RenderPass.js';
-import {UnrealBloomPass} from
-  'three/examples/jsm/postprocessing/UnrealBloomPass.js';
+import {UnrealBloomPass} from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 import MainScene from './main_scene';
+import {Quadtree} from './fmm';
 
 // Init
 const scene = new Scene();
@@ -30,8 +25,8 @@ const renderModel = new RenderPass(scene, camera);
 const effectBloom = new UnrealBloomPass();
 const composer = new EffectComposer(renderer);
 
-composer.addPass( renderModel );
-composer.addPass( effectBloom );
+composer.addPass(renderModel);
+composer.addPass(effectBloom);
 
 
 // camera
@@ -41,13 +36,15 @@ camera.position.z = 1000;
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setClearColor(0x000000, 1);
 
+const qt = new Quadtree(3);
+console.log(qt);
 
 // render loop
 const onAnimationFrameHandler = () => {
   const dt = clock.getDelta();
 
   control.update();
-  mainScene.update(dt);
+  // mainScene.update(dt);
 
   renderer.render(scene, camera);
   composer.render(0.01);
