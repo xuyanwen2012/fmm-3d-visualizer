@@ -7,7 +7,7 @@
  * @return {Vec2}
  */
 export default function(p, q) {
-  const distance = p.sub(q);
+  const distance = q.sub(p);
   const normSqr = distance.normSqr() + 1e-3;
   return distance.div(Math.pow(normSqr, 3 / 2));
 }

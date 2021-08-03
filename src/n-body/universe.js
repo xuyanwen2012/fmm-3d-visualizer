@@ -1,16 +1,19 @@
 'use strict';
 
 import {Body, Vec2} from './index';
-import {computeNSquared} from '../native';
 
 export default class Universe {
   /**
-   * @param {{num: Number, method: string}} options
+   * @param {object} options
    */
-  constructor(options = {
-    num: 1024,
-    method: 'native',
-  }) {
+  constructor(options) {
+    const defaultOptions ={
+      num: 1024,
+      method: 'native',
+    };
+
+    options = Object.assign({}, defaultOptions, options);
+
     /**
      * @type {Body[]}
      */
@@ -40,7 +43,7 @@ export default class Universe {
     }
 
     // Update position
-    this.bodies.forEach((body) => body.position = body.velocity.mul(dt));
+    this.bodies.forEach((body) => body.position.addAsg(body.velocity.mul(dt)));
   }
 
   /**
