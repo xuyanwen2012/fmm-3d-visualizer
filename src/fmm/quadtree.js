@@ -61,7 +61,10 @@ class Node {
     }
   }
 
-
+  /**
+   * @param {number} currentLevel
+   * @param {number} maxLevel
+   */
   expand(currentLevel, maxLevel) {
     if (currentLevel >= maxLevel) {
       return;
@@ -87,6 +90,8 @@ class Node {
           new Rect(new Vec2(x + hw, y + hh), halfBounds), nextLevel, this.qt),
     ];
 
+    this.qt.boxes[currentLevel].push(this);
+
     this.childern.forEach((child) => {
       child.expand(currentLevel + 1, maxLevel);
     });
@@ -110,7 +115,10 @@ export default class Quadtree {
     /**
      * @type {Node[][]}
      */
-    this.boxes = Array(maxLevels).fill([]);
+    this.boxes = [];
+    for (let i = 0; i < maxLevels; i++) {
+      this.boxes[i] = [];
+    }
 
     this.root.expand(0, maxLevels);
   }

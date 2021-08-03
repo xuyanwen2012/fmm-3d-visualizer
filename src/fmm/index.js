@@ -20,6 +20,12 @@ function buildQuadtree(sources) {
 export function computeFMM(sources, targets) {
   const qt = buildQuadtree(sources);
   console.log(qt);
+
+
+  console.log(qt.boxes);
+
+
+  // tmp
   return sources.map((x)=>new Vec2(1.0, 0.0));
 }
 
