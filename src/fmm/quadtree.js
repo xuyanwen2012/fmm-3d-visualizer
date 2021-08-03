@@ -63,7 +63,7 @@ class Node {
 
 
   expand(currentLevel, maxLevel) {
-    if (currentLevel > maxLevel) {
+    if (currentLevel >= maxLevel) {
       return;
     }
 
@@ -107,6 +107,26 @@ export default class Quadtree {
         , 0
         , this);
 
+    /**
+     * @type {Node[][]}
+     */
+    this.boxes = Array(maxLevels).fill([]);
+
     this.root.expand(0, maxLevels);
+  }
+
+  /**
+   * @param {Body[]} bodies
+   */
+  insertBodies(bodies) {
+    bodies.forEach((body) => this.root.insert(body));
+  }
+
+  /**
+   * @param {number} level
+   * @return {Node[]}
+   */
+  getBoxesOfLevel(level) {
+    return this.boxes[level];
   }
 }

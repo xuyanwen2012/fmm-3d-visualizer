@@ -12,7 +12,9 @@ import {
 import discSprite from './disc.png';
 import Universe from './n-body/universe';
 import {computeNSquared} from './native';
+import {computeFMM} from './fmm';
 
+let a = true;
 const scale = 2000;
 
 export default class MainScene extends Group {
@@ -91,7 +93,11 @@ export default class MainScene extends Group {
    * @param {number} dt
    */
   update(dt) {
-    this.updateUniverse(dt);
+    if (a) {
+      this.updateUniverse(dt);
+      a = false;
+    }
+
     this.updateDisplay(dt);
     this.updateColors(dt);
   }
@@ -102,7 +108,10 @@ export default class MainScene extends Group {
    */
   updateUniverse(dt) {
     const bodies = this.universe.getBodies();
-    const forces = computeNSquared(bodies, bodies);
+
+    // const forces = computeNSquared(bodies, bodies);
+    const forces = computeFMM(bodies, bodies);
+
     this.universe.applyForcesToBodies(forces, dt * 0.001);
   }
 

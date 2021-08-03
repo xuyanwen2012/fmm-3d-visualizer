@@ -6,7 +6,7 @@ import {EffectComposer} from 'three/examples/jsm/postprocessing/EffectComposer';
 import {RenderPass} from 'three/examples/jsm/postprocessing/RenderPass.js';
 import {UnrealBloomPass} from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 import MainScene from './main_scene';
-import {Quadtree} from './fmm';
+
 
 // Init
 const scene = new Scene();
@@ -35,9 +35,6 @@ camera.position.z = 1000;
 // renderer
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setClearColor(0x000000, 1);
-
-const qt = new Quadtree(3);
-console.log(qt);
 
 // render loop
 const onAnimationFrameHandler = () => {
