@@ -24,7 +24,7 @@ export default class MainScene extends Group {
     /**
      * @type {Universe}
      */
-    this.universe = new Universe({num: 1024});
+    this.universe = new Universe({num: 256});
 
     /**
      * @type {Points}
