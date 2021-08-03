@@ -44,7 +44,7 @@ const onAnimationFrameHandler = () => {
   const dt = clock.getDelta();
 
   control.update();
-  // mainScene.update(dt);
+  mainScene.update(dt);
 
   renderer.render(scene, camera);
   composer.render(0.01);

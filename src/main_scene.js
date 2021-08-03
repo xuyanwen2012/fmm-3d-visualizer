@@ -23,7 +23,7 @@ export default class MainScene extends Group {
     /**
      * @type {Universe}
      */
-    this.universe = new Universe({num: 256});
+    this.universe = new Universe({num: 256 * 2});
 
     /**
      * @type {Points}
@@ -39,7 +39,7 @@ export default class MainScene extends Group {
     this.add(this.particles);
     this.add(...this.grids);
 
-    this.setGridVisible(false);
+    this.setGridVisible(true);
   }
 
   /**
@@ -81,7 +81,7 @@ export default class MainScene extends Group {
    */
   createHelpers(scale) {
     // Grid Helpers
-    const gridHelperA = new GridHelper(scale, 10);
+    const gridHelperA = new GridHelper(scale, Math.pow(2, 3 ));
     gridHelperA.rotateX(Math.PI / 2);
 
     return [gridHelperA];
@@ -102,7 +102,6 @@ export default class MainScene extends Group {
    */
   updateUniverse(dt) {
     const bodies = this.universe.getBodies();
-    // const forces = bodies.map((b) => new Vec2(0.01, 0));
     const forces = computeNSquared(bodies, bodies);
     this.universe.applyForcesToBodies(forces, dt * 0.001);
   }
