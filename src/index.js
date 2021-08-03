@@ -7,6 +7,9 @@ import {
   WebGLRenderer,
 } from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
+import {EffectComposer} from 'three/examples/jsm/postprocessing/EffectComposer';
+import {RenderPass} from 'three/examples/jsm/postprocessing/RenderPass.js';
+import {BloomPass} from 'three/examples/jsm/postprocessing/BloomPass.js';
 import MainScene from './main_scene';
 
 // Init
@@ -21,6 +24,12 @@ const camera = new PerspectiveCamera(
     55, window.innerWidth / window.innerHeight, 2, 50000);
 const renderer = new WebGLRenderer({antialias: true});
 const control = new OrbitControls(camera, renderer.domElement);
+
+const renderModel = new RenderPass(scene, camera);
+const effectBloom = new BloomPass(0.75);
+const composer = new EffectComposer(renderer);
+composer.addPass( renderModel );
+composer.addPass( effectBloom );
 
 // camera
 camera.position.z = 1000;
@@ -38,6 +47,8 @@ const onAnimationFrameHandler = () => {
   mainScene.update(dt);
 
   renderer.render(scene, camera);
+  composer.render(0.01);
+
   window.requestAnimationFrame(onAnimationFrameHandler);
 };
 window.requestAnimationFrame(onAnimationFrameHandler);
@@ -45,7 +56,10 @@ window.requestAnimationFrame(onAnimationFrameHandler);
 // resize
 const windowResizeHandler = () => {
   const {innerHeight, innerWidth} = window;
+
   renderer.setSize(innerWidth, innerHeight);
+  composer.setSize(innerWidth, innerHeight);
+
   camera.aspect = innerWidth / innerHeight;
   camera.updateProjectionMatrix();
 };

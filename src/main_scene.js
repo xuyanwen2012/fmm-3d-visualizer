@@ -12,9 +12,8 @@ import {
 import discSprite from './disc.png';
 import Universe from './n-body/universe';
 import {computeNSquared} from './native';
-import {Vec2} from './n-body';
 
-const scale = 1000;
+const scale = 2000;
 
 export default class MainScene extends Group {
   constructor() {
@@ -39,6 +38,8 @@ export default class MainScene extends Group {
 
     this.add(this.particles);
     this.add(...this.grids);
+
+    this.setGridVisible(false);
   }
 
   /**
