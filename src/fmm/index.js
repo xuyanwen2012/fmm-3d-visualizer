@@ -7,7 +7,7 @@ import {Vec2} from '../n-body';
  * @return {Quadtree}
  */
 function buildQuadtree(sources) {
-  const qt = new Quadtree(4);
+  const qt = new Quadtree(5);
   qt.insertBodies(sources);
   return qt;
 }

@@ -66,10 +66,6 @@ class Node {
    * @param {number} maxLevel
    */
   expand(currentLevel, maxLevel) {
-    if (currentLevel >= maxLevel) {
-      return;
-    }
-
     this.isLeaf = false;
 
     const x = this.bounds.position.x;
@@ -92,9 +88,13 @@ class Node {
 
     this.qt.boxes[currentLevel].push(this);
 
-    this.childern.forEach((child) => {
-      child.expand(currentLevel + 1, maxLevel);
-    });
+    if (currentLevel + 1 === maxLevel) {
+      this.isLeaf = true;
+    } else {
+      this.childern.forEach((child) => {
+        child.expand(currentLevel + 1, maxLevel);
+      });
+    }
   }
 }
 
