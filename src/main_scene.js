@@ -83,7 +83,7 @@ export default class MainScene extends Group {
    */
   createHelpers(scale) {
     // Grid Helpers
-    const gridHelperA = new GridHelper(scale, Math.pow(2, 3 ));
+    const gridHelperA = new GridHelper(scale, Math.pow(2, 4 ));
     gridHelperA.rotateX(Math.PI / 2);
 
     return [gridHelperA];
